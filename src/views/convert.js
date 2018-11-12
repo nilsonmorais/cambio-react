@@ -5,6 +5,10 @@ import { Text, Button } from 'react-native-elements';
 import axios from 'axios';
 
 export default class ConvertScreen extends Component {
+  static navigationOptions = {
+    drawerLabel: 'Conversão',
+    title: "Conversão de Moedas",
+  }
   constructor(props) {
     super(props);
     this.state = {

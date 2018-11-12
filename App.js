@@ -7,20 +7,20 @@ import { createStackNavigator } from 'react-navigation';
 import { Text, Header, Button } from 'react-native-elements';
 
 //Views
-import LoginDrawer from './src/drawer/login';
-import HomeDrawer from './src/drawer/home';
-import ConvertDrawer from './src/drawer/convert';
+import LoginScreen from './src/views/login';
+import HomeScreen from './src/views/home';
+import ConvertScreen from './src/views/convert';
 
 const RootStack = createStackNavigator(
   {
     Home: {
-      screen: HomeDrawer
+      screen: HomeScreen
     },
     Convert:{ 
-      screen: ConvertDrawer
+      screen: ConvertScreen
     },
     Login:{ 
-      screen: LoginDrawer
+      screen: LoginScreen
     }
   },
   {

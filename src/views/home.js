@@ -2,7 +2,14 @@ import React, { Component } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
 import { Text, Button } from 'react-native-elements';
 
+import LogoTitle from '../LogoTitle';
+
 export default class HomeScreen extends Component {
+  static navigationOptions = {
+    drawerLabel: 'Home',
+    title: 'Página Inicial',
+    headerTitle: <LogoTitle />
+  }
   render() {
     return (
       <View style={ styles.container }>
