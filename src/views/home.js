@@ -8,7 +8,7 @@ export default class HomeScreen extends Component {
   static navigationOptions = {
     drawerLabel: 'Home',
     title: 'Página Inicial',
-    headerTitle: <LogoTitle />
+    header: <LogoTitle />
   }
   render() {
     return (

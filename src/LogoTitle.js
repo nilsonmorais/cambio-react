@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import { Image } from 'react-native';
+import { Image, View, Text } from 'react-native';
+import { Header } from 'react-native-elements';
 
 export default class LogoTitle extends React.Component {
   render() {
     return (
-      <Image
-        source={require('../assets/res/mipmap-mdpi/ic_launcher.png')}
-        style={{ width: 30, height: 30 }}
+      <Header
+        // leftComponent={{ icon: 'cash', color: '#fff' }}
+        centerComponent={{ text: 'Câmbio App', style: { color: '#fff' } }}
+        // rightComponent={{ icon: 'home', color: '#fff' }}
       />
     );
   }
