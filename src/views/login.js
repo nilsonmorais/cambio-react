@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
-import { Text } from 'react-native-elements';
+import { Text, Button } from 'react-native-elements';
 
 
-export default class Login extends Component {
+export default class LoginScreen extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text h1>Login View</Text>
-        <ScrollView
-          horizontal
-          pagingEnabled
-          decelerationRate={0.993}
-        >
-        </ScrollView>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Text>Home Screen</Text>
+        <Button
+          title="Go to Home"
+          onPress={() => this.props.navigation.navigate('Home')}
+        />
       </View>
     );
   }

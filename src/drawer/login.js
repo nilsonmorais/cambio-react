@@ -1,7 +1,7 @@
 import Expo from 'expo';
 import React from 'react';
 import { createStackNavigator } from 'react-navigation';
-import { Icon } from 'react-native-elements';
+import { Icon, Button } from 'react-native-elements';
 
 import Login from '../views/login';
 
@@ -11,6 +11,7 @@ const LoginDrawerItem = createStackNavigator({
 
 LoginDrawerItem.navigationOptions = {
   drawerLabel: 'Login',
+  title: "Login",
   drawerIcon: ({ tintColor }) => (
     <Icon
       name="email"
@@ -23,6 +24,13 @@ LoginDrawerItem.navigationOptions = {
       color={tintColor}
     />
   ),
+  headerRight: (
+    <Button
+      onPress={() => alert('This is a button!')}
+      title="Info"
+      color="#fff"
+    />
+  )
 };
 
 export default LoginDrawerItem;
