@@ -1,27 +1,51 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
-import { Text, Button } from 'react-native-elements';
+import { Text, Button, List, ListItem } from 'react-native-elements';
 
 import LogoTitle from '../LogoTitle';
+
+const list = [
+  {
+    title: 'Login',
+    icon: 'vpn-key',
+    nav: 'Login',
+  },
+  {
+    title: 'Conversão de Moeda',
+    icon: 'sync',
+    nav: 'Convert',
+  },
+  {
+    title: 'Notícias',
+    icon: 'newspaper',
+    nav: 'News',
+  },
+  {
+    title: 'Ajuda',
+    icon: 'help',
+    nav: 'Help',
+  },
+];
 
 export default class HomeScreen extends Component {
   static navigationOptions = {
     drawerLabel: 'Home',
     title: 'Página Inicial',
-    header: <LogoTitle />
-  }
+    header: <LogoTitle />,
+  };
   render() {
     return (
-      <View style={ styles.container }>
-        <Text>Home Screen</Text>
-        <Button
-          title="Go to Login"
-          onPress={() => this.props.navigation.navigate('Login')}
-        />
-        <Button
-          title="Go to Convert"
-          onPress={() => this.props.navigation.navigate('Convert')}
-        />
+      <View style={styles.container}>
+        <List>
+          {list.map(item => (
+            <ListItem
+              key={item.title}
+              title={item.title}
+              leftIcon={{ name: item.icon }}
+              onPress={() => this.props.navigation.navigate(item.nav)}
+            />
+          ))}
+        </List>
       </View>
     );
   }
@@ -29,6 +53,6 @@ export default class HomeScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white'
-  }
+    backgroundColor: 'white',
+  },
 });
