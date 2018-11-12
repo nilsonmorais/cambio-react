@@ -4,6 +4,7 @@ import { createStackNavigator } from 'react-navigation';
 import { Icon } from 'react-native-elements';
 
 import Home from '../views/home';
+import LogoTitle from '../LogoTitle';
 
 const HomeDrawerItem = createStackNavigator({
   screen: Home
@@ -11,19 +12,8 @@ const HomeDrawerItem = createStackNavigator({
 
 HomeDrawerItem.navigationOptions = {
   drawerLabel: 'Home',
-  title: "Página Inicial",
-  drawerIcon: ({ tintColor }) => (
-    <Icon
-      name="home"
-      size={30}
-      iconStyle={{
-        width: 30,
-        height: 30
-      }}
-      type="material"
-      color={tintColor}
-    />
-  ),
+  title: 'Página Inicial',
+  headerTitle: <LogoTitle />
 };
 
 export default HomeDrawerItem;

@@ -11,21 +11,25 @@ import LoginDrawer from './src/drawer/login';
 import HomeDrawer from './src/drawer/home';
 import ConvertDrawer from './src/drawer/convert';
 
-const SCREEN_WIDTH = Dimensions.get('window').width;
-
-const MainRoot = createStackNavigator(
+const RootStack = createStackNavigator(
   {
-    Home: HomeDrawer,
-    Convert: ConvertDrawer,
-    Login: LoginDrawer
+    Home: {
+      screen: HomeDrawer
+    },
+    Convert:{ 
+      screen: ConvertDrawer
+    },
+    Login:{ 
+      screen: LoginDrawer
+    }
   },
   {
     initialRouteName: 'Home',
     navigationOptions: {
       headerStyle: {
-        backgroundColor: 'indigo',
+        backgroundColor: 'white',
       },
-      headerTintColor: '#fff',
+      headerTintColor: '#333',
       headerTitleStyle: {
         fontWeight: 'bold',
       },
@@ -38,8 +42,6 @@ const MainRoot = createStackNavigator(
 
 export default class AppContainer extends React.Component {
   render() {
-    return <MainRoot />;
+    return <RootStack />;
   }
 }
-
-Expo.registerRootComponent(AppContainer);
