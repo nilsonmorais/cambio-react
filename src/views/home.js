@@ -23,8 +23,8 @@ export default class HomeScreen extends Component {
   static navigationOptions = {
     drawerLabel: 'Home',
     title: 'Página Inicial',
-    header: <LogoTitle />
-  }
+    header: <LogoTitle />,
+  };
   render() {
     return (
       <View style={ styles.container }>
@@ -50,6 +50,6 @@ export default class HomeScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white'
-  }
+    backgroundColor: 'white',
+  },
 });
