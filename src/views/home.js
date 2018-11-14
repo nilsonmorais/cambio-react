@@ -27,7 +27,7 @@ export default class HomeScreen extends Component {
   };
   render() {
     return (
-      <View style={ styles.container }>
+      <ScrollView style={ styles.container }>
       {
         list.map((l, i) => (
           <Card
@@ -43,13 +43,13 @@ export default class HomeScreen extends Component {
           </Card>
         ))
       }
-      </View>
+      </ScrollView>
     );
   }
 }
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: '#ECEFF1',
   },
 });
