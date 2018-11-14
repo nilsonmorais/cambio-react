@@ -9,6 +9,7 @@ export default class LogoTitle extends React.Component {
         // leftComponent={{ icon: 'cash', color: '#fff' }}
         centerComponent={{ text: 'Câmbio App', style: { color: '#fff' } }}
         // rightComponent={{ icon: 'home', color: '#fff' }}
+        leftComponent={{ icon: 'home', color: '#fff' }}
       />
     );
   }

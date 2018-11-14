@@ -19,7 +19,7 @@ const list = [
   },
 ]
 
-export default class HomeScreen extends Component {
+export default class NewsScreen extends Component {
   static navigationOptions = {
     drawerLabel: 'Home',
     title: 'Página Inicial',
@@ -28,6 +28,7 @@ export default class HomeScreen extends Component {
   render() {
     return (
       <View style={ styles.container }>
+      <Text>News</Text>
       {
         list.map((l, i) => (
           <Card
