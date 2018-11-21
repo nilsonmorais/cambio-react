@@ -1,39 +1,33 @@
 import React from 'react';
-import { createStackNavigator } from 'react-navigation';
+import Expo from 'expo';
 
 //Views
-import NewsScreen from './src/views/news';
 import HomeScreen from './src/views/home';
-import ConvertScreen from './src/views/convert';
-
-const RootStack = createStackNavigator(
-  {
-    Home: {
-      screen: HomeScreen
-    },
-    Convert:{ 
-      screen: ConvertScreen
-    },
-    News:{ 
-      screen: NewsScreen
-    }
-  },
-  {
-    initialRouteName: 'Home',
-    navigationOptions: {
-      headerStyle: {
-        backgroundColor: 'white',
-      },
-      headerTintColor: '#333',
-      headerTitleStyle: {
-        fontWeight: 'bold',
-      },
-    },
-  },
-);
 
 export default class AppContainer extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isReady: false
+    };
+  }
+  componentWillMount(){
+    this.loadFonts();
+  }
+  async loadFonts() {
+    await Expo.Font.loadAsync({
+      'Roboto': require('native-base/Fonts/Roboto.ttf'),
+      'Roboto_medium': require('native-base/Fonts/Roboto_medium.ttf'),
+    });
+    this.setState({ isReady: true });
+
+  }
   render() {
-    return <RootStack />;
+    if (this.state.isReady) {
+      return <HomeScreen />;
+    } else {
+      return <Expo.AppLoading />;
+    }
   }
 }

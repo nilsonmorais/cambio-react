@@ -1,55 +1,31 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, ScrollView } from 'react-native';
-import { Text, Button, Card } from 'react-native-elements';
+import { 
+  Container, Content, Button, Text, Body,  Header, Tab, Tabs, Left, Right, Title
+} from 'native-base';
 
-import LogoTitle from '../LogoTitle';
-
-const list = [
-  {
-    title: 'Últimas Notícias',
-    background: require('../../assets/bg3.png'),
-    button: 'Abrir',
-    screen: 'News'
-  },
-  {
-    title: 'Conversão de Moeda',
-    background: require('../../assets/bg1.png'),
-    button: 'Converter',
-    screen: 'Convert'
-  },
-]
+import NewsScreen from './news';
+import ConvertScreen from './convert';
 
 export default class HomeScreen extends Component {
-  static navigationOptions = {
-    drawerLabel: 'Home',
-    title: 'Página Inicial',
-    header: <LogoTitle />,
-  };
   render() {
     return (
-      <ScrollView style={ styles.container }>
-      {
-        list.map((l, i) => (
-          <Card
-            key={i}
-            title={l.title}
-            image={l.background}
-            >
-          <Button
-            backgroundColor='#03A9F4'
-            buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0 }}
-            onPress={() => this.props.navigation.navigate(l.screen)}
-            title={l.button} />
-          </Card>
-        ))
-      }
-      </ScrollView>
+      <Container>
+        <Header hasTabs >
+          <Left />
+          <Body>
+            <Title>CâmbioApp</Title>
+          </Body>
+          <Right />
+        </Header>
+        <Tabs>
+          <Tab heading="Notícias">
+            <NewsScreen />
+          </Tab>
+          <Tab heading="Converter">
+            <ConvertScreen />
+          </Tab>
+      </Tabs>
+      </Container>
     );
   }
 }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#ECEFF1',
-  },
-});
