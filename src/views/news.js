@@ -1,56 +1,37 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
-import { Text, Button, Card } from 'react-native-elements';
 
-import LogoTitle from '../LogoTitle';
-
-const list = [
-  {
-    title: 'Últimas Notícias',
-    background: require('../../assets/bg3.png'),
-    button: 'Abrir',
-    screen: 'News'
-  },
-  {
-    title: 'Conversão de Moeda',
-    background: require('../../assets/bg1.png'),
-    button: 'Converter',
-    screen: 'Convert'
-  },
-]
+import NewsContainer from './newsContainer';
+import * as rssParser from 'react-native-rss-parser';
 
 export default class NewsScreen extends Component {
-  static navigationOptions = {
-    drawerLabel: 'Home',
-    title: 'Página Inicial',
-    header: <LogoTitle />
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isReady: false,
+      news: null
+    };
+  }
+  async loadNews(){
+    await fetch('http://www.nasa.gov/rss/dyn/breaking_news.rss')
+      .then((response) => response.text())
+      .then((responseData) => rssParser.parse(responseData))
+      .then((rss) => {
+        console.log(rss.title);
+        console.log(rss.items.length);
+        this.setState({ news: rss.items });
+      });
+      this.setState({ isReady: true });
+  }
+  componentWillMount() {
+    this.loadNews();
   }
   render() {
-    return (
-      <View style={ styles.container }>
-      <Text>News</Text>
-      {
-        list.map((l, i) => (
-          <Card
-            key={i}
-            title={l.title}
-            image={l.background}
-            >
-          <Button
-            backgroundColor='#03A9F4'
-            buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0 }}
-            onPress={() => this.props.navigation.navigate(l.screen)}
-            title={l.button} />
-          </Card>
-        ))
-      }
-      </View>
-    );
+    if (this.state.isReady) {
+      return <NewsContainer news={this.state.news} />;
+    } else {
+      return <Expo.AppLoading />;
+    }
   }
 }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'white'
-  }
-});
