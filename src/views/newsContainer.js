@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import { TouchableOpacity } from 'react-native';
 import { 
   Container, Icon, Card, CardItem, Content, Right, ListItem, Text 
 } from 'native-base';
 
+import NewsDetail from './newsDetail';
 
 export default class NewsContainer extends Component {
   constructor(props) {
@@ -10,10 +12,10 @@ export default class NewsContainer extends Component {
     this.state = {
       news: this.props.news
     };
-  }
-  componentWillMount(){
-    console.log('Before Mount: ' + this.state.news)
 
+  }
+  _loadNewsEvent(e) { 
+    console.log(e);
   }
   render() {
     return (
@@ -21,15 +23,17 @@ export default class NewsContainer extends Component {
         <Content>
           {
             this.state.news.map((l, i) => (
-              <Card key={i}>
+              <TouchableOpacity key={i} onPress={() => { this._loadNewsEvent(l.links) }}>
+              <Card>
                 <CardItem>
-                  <Icon active name="logo-googleplus" />
+                  <Icon active type="FontAwesome" name="rss" style={{ color: '#FF5722' }} />
                   <Text>{l.title}</Text>
                   <Right>
-                    <Icon name="arrow-forward" />
+                    <Icon type="FontAwesome" name="arrow-right" />
                   </Right>
                 </CardItem>
               </Card>
+              </TouchableOpacity>
             ))
           }
         </Content>
