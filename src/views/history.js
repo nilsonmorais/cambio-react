@@ -74,7 +74,7 @@ export default class HistoryScreen extends React.PureComponent {
                             <CardItem>
                                 <LineChart
                                     data={this.state.dataChart1}
-                                    width={screenWidth}
+                                    width={screenWidth*0.9}
                                     height={220}
                                     chartConfig={chartConfig}
                                 />
