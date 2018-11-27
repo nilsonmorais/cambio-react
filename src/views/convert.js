@@ -85,7 +85,7 @@ export default class ConvertScreen extends Component {
     );
   }
   calculateRates = () => {
-    this.setState({ valor2: parseFloat(this.state.rate1) / parseFloat(this.state.rate2) * parseFloat(this.state.valor1) })
+    this.setState({ valor2: parseFloat(this.state.rate1) / parseFloat(this.state.rate2) * parseFloat(this.state.valor1) });
   }
   getRates = () => {
     axios

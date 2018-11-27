@@ -5,6 +5,7 @@ import {
 
 import NewsScreen from './news';
 import ConvertScreen from './convert';
+import HistoryScreen from './history';
 
 export default class HomeScreen extends Component {
   render() {
@@ -23,6 +24,9 @@ export default class HomeScreen extends Component {
           </Tab>
           <Tab heading="Converter">
             <ConvertScreen />
+          </Tab>
+          <Tab heading="Histórico">
+            <HistoryScreen />
           </Tab>
       </Tabs>
       </Container>
