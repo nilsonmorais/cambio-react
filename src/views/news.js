@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
+import Expo from 'expo';
 
 import NewsContainer from './newsContainer';
 import * as rssParser from 'react-native-rss-parser';
