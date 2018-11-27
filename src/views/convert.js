@@ -33,7 +33,7 @@ export default class ConvertScreen extends Component {
                 <Item picker>
                   <Picker
                     mode="dropdown"
-                    iosIcon={<Icon name="ios-arrow-down-outline" />}
+                    iosIcon={<Icon type="FontAwesome" name="arrow-down" />}
                     style={{ width: undefined }}
                     placeholder="Selecione Moeda"
                     placeholderStyle={{ color: "#bfc6ea" }}
@@ -49,7 +49,7 @@ export default class ConvertScreen extends Component {
                 <Item picker>
                   <Picker
                     mode="dropdown"
-                    iosIcon={<Icon name="ios-arrow-down-outline" />}
+                    iosIcon={<Icon type="FontAwesome" name="arrow-down" />}
                     style={{ width: undefined }}
                     placeholder="Selecione Moeda"
                     placeholderStyle={{ color: "#bfc6ea" }}
