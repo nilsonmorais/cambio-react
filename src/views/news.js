@@ -14,7 +14,7 @@ export default class NewsScreen extends Component {
     };
   }
   async loadNews(){
-    await fetch('http://www.nasa.gov/rss/dyn/breaking_news.rss')
+    await fetch('https://www.infomoney.com.br/ultimas-noticias/rss')
       .then((response) => response.text())
       .then((responseData) => rssParser.parse(responseData))
       .then((rss) => {
