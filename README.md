@@ -4,11 +4,11 @@
 
 - Screens
     - Notícias
-      - RSS Feed
+      - ~~RSS Feed~~
     - Main
-      - 3 tiles
+      - ~~3 tiles~~
     - Conversão
       - ~~Mecanismo de conversão~~
-      - Selecionar Moeda
-      - Histórico
+      - ~~Selecionar Moeda~~
+      - ~~Histórico~~
       - Últimas conversoes
