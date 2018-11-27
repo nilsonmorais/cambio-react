@@ -1,9 +1,29 @@
 import React, { Component } from 'react';
 import { 
-  Container, Header, Content, Card, CardItem, Text, Body
+  Container, Header, Content, Card, CardItem, Text, Body, Left, Right, Icon, Title
 } from 'native-base';
 
-
+class LogoTitle extends React.Component {
+  render() {
+    return (
+      <Header>
+        <Left>
+          <Button transparent
+            onPress={() => {
+              this.props.navigation.navigate('Home');
+            }}
+          >
+            <Icon name='arrow-back' />
+          </Button>
+        </Left>
+        <Body>
+          <Title>Detalhes</Title>
+        </Body>
+        <Right />
+      </Header>
+    );
+  }
+}
 export default class NewsDetail extends Component {
   constructor(props) {
     super(props);
@@ -13,8 +33,11 @@ export default class NewsDetail extends Component {
   }
   componentWillMount(){
     console.log('Before Mount: ' + this.state.news)
-
   }
+  static navigationOptions = {
+    title: 'Detalhes',
+    headerTitle: <LogoTitle />,
+  };
   render() {
     return (
       <Container>
