@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
-import { View, TextInput, StyleSheet, Picker } from 'react-native';
-import { Text, Button } from 'react-native-elements';
-
+import { 
+  Container, Content, Card, CardItem, Text, Body, Item, Button, Picker , Input, Icon
+} from 'native-base';
 import axios from 'axios';
 
 export default class ConvertScreen extends Component {
-  static navigationOptions = {
-    drawerLabel: 'Conversão',
-    title: "Conversão de Moedas",
-  }
   constructor(props) {
     super(props);
     this.state = {
@@ -23,58 +19,69 @@ export default class ConvertScreen extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <View style={styles.header}>
-          <Text h3>Conversor De Moeda</Text>
-        </View>
-        <View style={styles.content}>
-          <TextInput style={styles.input} onChangeText={valor1 => this.setState({ valor1 })} placeholder=" Insira o valor" />
-          <View style={{ flex: 1, flexDirection: 'row' }}>
-            <View style={{ width: 100, height: 50 }} >
-              <Picker label="a"
-                selectedValue={this.state.currency2}
-                style={{ height: 50, width: 100 }}
-                onValueChange={(itemValue, itemIndex) =>
-                  this.setState({ currency2: itemValue })
-                }
-              >
-                <Picker.Item label="GBP" value="GBP" />
-                <Picker.Item label="USD" value="USD" />
-                <Picker.Item label="BRL" value="BRL" />
-              </Picker>
-            </View>
-            <View style={{ width: 100, height: 50 }}>
-              <Picker
-                selectedValue={this.state.currency1}
-                style={{ height: 50, width: 100 }}
-                onValueChange={(itemValue, itemIndex) =>
-                  this.setState({ currency1: itemValue })
-                }
-              >
-                <Picker.Item label="GBP" value="GBP" />
-                <Picker.Item label="USD" value="USD" />
-                <Picker.Item label="BRL" value="BRL" />
-              </Picker>
-            </View>
-          </View>
-        </View>
-
-        <View style={styles.content}>
-          <Button raised
-            icon={{ name: 'cached', size: 32 }}
-            buttonStyle={{ backgroundColor: '#ff4f00', borderRadius: 10 }}
-            textStyle={{ textAlign: 'center' }}
-            title="Converter" onPress={() => this.getRates()} />
-          <Text h4>
-            {'\n'}
-            {'Valor em '}{this.state.currency2}{': '}
-            {this.state.valor1}
-            {'\n'}{'\n'}
-            {'Valor em '}{this.state.currency1}{': '}
-            {Math.floor(this.state.valor2 * 1000) / 1000}
-          </Text>
-        </View>
-      </View>
+      <Container>
+        <Content padder>
+          <Card>
+            <CardItem header bordered>
+              <Text>Conversão de Moedas</Text>
+            </CardItem>
+            <CardItem bordered>
+              <Body>
+                <Item regular>
+                  <Input placeholder='Valor a converter' onChangeText={valor1 => this.setState({ valor1 })} />
+                </Item>
+                <Item picker>
+                  <Picker
+                    mode="dropdown"
+                    iosIcon={<Icon name="ios-arrow-down-outline" />}
+                    style={{ width: undefined }}
+                    placeholder="Selecione Moeda"
+                    placeholderStyle={{ color: "#bfc6ea" }}
+                    placeholderIconColor="#007aff"
+                    selectedValue={this.state.currency2}
+                    onValueChange={this.onValueChange2.bind(this)}
+                  >
+                    <Picker.Item label="US Dollar" value="USD" />
+                    <Picker.Item label="UK Libra" value="GBP" />
+                    <Picker.Item label="BR Real" value="BRL" />
+                  </Picker>
+                </Item>
+                <Item picker>
+                  <Picker
+                    mode="dropdown"
+                    iosIcon={<Icon name="ios-arrow-down-outline" />}
+                    style={{ width: undefined }}
+                    placeholder="Selecione Moeda"
+                    placeholderStyle={{ color: "#bfc6ea" }}
+                    placeholderIconColor="#007aff"
+                    selectedValue={this.state.currency1}
+                    onValueChange={this.onValueChange1.bind(this)}
+                  >
+                    <Picker.Item label="US Dollar" value="USD" />
+                    <Picker.Item label="UK Libra" value="GBP" />
+                    <Picker.Item label="BR Real" value="BRL" />
+                  </Picker>
+                </Item>
+              </Body>
+            </CardItem>
+            <CardItem footer bordered>
+              <Button block onPress={() => this.getRates()}>
+                <Text>Converter</Text>
+              </Button>
+            </CardItem>
+            <CardItem>
+              <Text>
+                {'\n'}
+                {'Valor em '}{this.state.currency2}{': '}
+                {this.state.valor1}
+                {'\n'}{'\n'}
+                {'Valor em '}{this.state.currency1}{': '}
+                {Math.floor(this.state.valor2 * 1000) / 1000}
+              </Text>
+            </CardItem>
+          </Card>
+        </Content>
+      </Container>
     );
   }
   calculateRates = () => {
@@ -97,27 +104,14 @@ export default class ConvertScreen extends Component {
         console.log(err);
       });
   };
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  },
-  header: {
-    height: 80,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    marginBottom: 10
-  },
-  content: {
-    flex: 1,
-    paddingLeft: 10,
-    paddingRight: 10
-  },
-  input: {
-    borderColor: '#000',
-    borderWidth: 1,
-    height: 50,
-    fontSize: 20
+  onValueChange2(value: String){
+    this.setState({
+      currency2: value
+    });
   }
-});
+  onValueChange1(value: String){
+    this.setState({
+      currency1: value
+    });
+  }
+}
