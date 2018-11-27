@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, Linking } from 'react-native';
 import { 
   Container, Icon, Card, CardItem, Content, Right, ListItem, Text 
 } from 'native-base';
@@ -16,6 +16,7 @@ export default class NewsContainer extends Component {
   }
   _loadNewsEvent(e) { 
     console.log(e);
+    Linking.openURL(e[0].url);
   }
   render() {
     return (
