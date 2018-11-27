@@ -1,14 +1,15 @@
-import React from 'react'
+import React from 'react';
 import moment from 'moment';
 import axios from 'axios';
-import { Grid, LineChart, XAxis, YAxis } from 'react-native-svg-charts'
-import { View, Text } from 'react-native'
- 
+import { Dimensions } from 'react-native'
+import { LineChart } from 'react-native-chart-kit';
+import { CardItem, Card, Content, Container, Text } from 'native-base';
 
 export default class HistoryScreen extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
+            isReady: false,
             currency1: 'GBP',
             currency2: 'USD',
             currency3: 'BRL',
@@ -19,17 +20,27 @@ export default class HistoryScreen extends React.PureComponent {
         const now = moment();
         const todayString = now.format(moment.HTML5_FMT.DATE);
         const weekBeforeString = now.subtract(7, 'days').format(moment.HTML5_FMT.DATE);
-        const url = 'https://api.exchangeratesapi.io/history?start_at='+weekBeforeString+'&end_at='+todayString+'&symbols=BRL,GBP,USD';
+        const url = 'https://api.exchangeratesapi.io/history?start_at='+weekBeforeString+'&end_at='+todayString+'&symbols=BRL,GBP&base=USD';
         axios.get(url)
             .then(res => {
-                console.debug(res.data);
-                let resultUSD = Object.keys(res.data.rates).map((k,e) => {
-                    let _o = res.data.rates[k]
+                //console.debug(res.data);
+                let _data = {
+                    labels: [],
+                    datasets: [{
+                        data: []
+                    }]
+                };
+                Object.keys(res.data.rates).forEach((k,e) => {
+                    var _dia = moment(k).format('DD/MM');
+                    _data.labels.push(_dia);
+                    var _usd = res.data.rates[k].USD;
+                    var _brl = res.data.rates[k].BRL;
+                    _data.datasets[0].data.push(_brl);
                 });
                 this.setState({
-                    h7usdbrl: resultUSD
+                    dataChart1: _data,
+                    isReady: true
                 });
-                console.log(this.state.h7usdbrl);
             })
             .catch(err => {
                 console.log(err);
@@ -40,40 +51,41 @@ export default class HistoryScreen extends React.PureComponent {
         this.loadData();
     }
     render() {
-        const data = [50, 10, 40, 95, -4, -24, 85, 91, 35, 53, -53, 24, 50, -20, -80]
-        const axesSvg = { fontSize: 10, fill: 'grey' };
-        const verticalContentInset = { top: 10, bottom: 10 }
-        const xAxisHeight = 30
-        return (
-            <View style={{ height: 100, padding: 20 }}>
-                <Text>US Dólar x BRL Real - Últimos 7 dias</Text>
-                <View style={{ height: 200, padding: 20, flexDirection: 'row' }}>
-                    <YAxis
-                        data={data}
-                        style={{ marginBottom: xAxisHeight }}
-                        contentInset={verticalContentInset}
-                        svg={axesSvg}
-                    />
-                    <View style={{ flex: 1, marginLeft: 10 }}>
-                        <LineChart
-                            style={{ flex: 1 }}
-                            data={data}
-                            contentInset={verticalContentInset}
-                            svg={{ stroke: 'rgb(134, 65, 244)' }}
-                        >
-                            <Grid />
-                        </LineChart>
-                        <XAxis
-                            style={{ marginHorizontal: -10, height: xAxisHeight }}
-                            data={data}
-                            formatLabel={(value, index) => index}
-                            contentInset={{ left: 10, right: 10 }}
-                            svg={axesSvg}
-                        />
-                    </View>
-                </View>
-            </View>
-        )
+        const data = {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+            datasets: [{
+                data: [20, 45, 28, 80, 99, 43]
+            }]
+        }
+        const screenWidth = Dimensions.get('window').width
+        const chartConfig = {
+            backgroundGradientFrom: '#1E2923',
+            backgroundGradientTo: '#08130D',
+            color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`
+        }
+        if (this.state.isReady) {
+            return (
+                <Container>
+                    <Content>
+                        <Card>
+                            <CardItem>
+                                <Text>US Dólar x BRL Real - Última Semana</Text>
+                            </CardItem>
+                            <CardItem>
+                                <LineChart
+                                    data={this.state.dataChart1}
+                                    width={screenWidth}
+                                    height={220}
+                                    chartConfig={chartConfig}
+                                />
+                            </CardItem>
+                        </Card>
+                    </Content>
+                </Container>
+            )
+        } else {
+            return <Expo.AppLoading />;
+        }
     }
 
 }
